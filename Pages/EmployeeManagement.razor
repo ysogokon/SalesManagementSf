@@ -18,8 +18,11 @@
     <GridEditSettings AllowEditing="true"></GridEditSettings>
     <GridColumns>
       <GridColumn IsPrimaryKey="true" Field="@nameof(EmployeeModel.Id)" Width="50px"></GridColumn>
+
       <GridColumn HeaderText="First Name" Field="@nameof(EmployeeModel.FirstName)"></GridColumn>
+
       <GridColumn HeaderText="Last Name" Field="@nameof(EmployeeModel.LastName)"></GridColumn>
+
       <GridForeignColumn HeaderText="Designation" TValue="EmployeeJobTitle"
                          Field="@nameof(EmployeeModel.EmployeeJobTitleId)"
                          ForeignDataSource="employeeJobTitleData"
@@ -30,21 +33,23 @@
                           DataSource="employeeJobTitleData"
                           TItem="EmployeeJobTitle"
                           TValue="int">
-            <DropDownListFieldSettings Text="Name" Value="EmployeeJobTitleId">
-            </DropDownListFieldSettings>
-
+            <DropDownListFieldSettings Text="Name" Value="EmployeeJobTitleId"></DropDownListFieldSettings>
           </SfDropDownList>
         </EditTemplate>
       </GridForeignColumn>
+
       <GridColumn Field="@nameof(EmployeeModel.Gender)">
         <EditTemplate>
-          <SfDropDownList DataSource="genderCollection" TItem="string" TValue="string"
-                          @bind-Value="@((context as EmployeeModel).Gender)">
-
+          <SfDropDownList @bind-Value="@((context as EmployeeModel).Gender)"
+                          DataSource="genderCollection"
+                          TItem="string"
+                          TValue="string">
           </SfDropDownList>
         </EditTemplate>
       </GridColumn>
+
       <GridColumn HeaderText="Date of Birth" Field="@nameof(EmployeeModel.DateOfBirth)" Format="d"></GridColumn>
+
       <GridColumn HeaderText="Reports To" Field="@nameof(EmployeeModel.ReportToEmpId)" Width="100px"></GridColumn>
     </GridColumns>
   </SfGrid>
@@ -57,6 +62,7 @@
     Female,
     Other
   }
+
   private string[] genderCollection = Enum.GetNames ( typeof ( GenderVal ) );
 
   private List<EmployeeModel>? employeeData = null;
