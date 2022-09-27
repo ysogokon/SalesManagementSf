@@ -16,26 +16,25 @@ namespace SalesManagementApp.Services
       this.salesManagementDbContext = salesManagementDbContext;
     }
 
-    //public async Task<Employee> AddEmployee ( EmployeeModel employeeModel )
-    //{
-    //  try
-    //  {
-    //    Employee employeeToAdd = employeeModel.Convert ();
+    public async Task<Employee> AddEmployee ( EmployeeModel employeeModel )
+    {
+      try
+      {
+        Employee employeeToAdd = employeeModel.Convert ();
 
-    //    var result = await salesManagementDbContext.Employees
-    //                    .AddAsync ( employeeToAdd );
+        var result = await salesManagementDbContext.Employees
+                        .AddAsync ( employeeToAdd );
 
-    //    await salesManagementDbContext.SaveChangesAsync ();
+        _ = await salesManagementDbContext.SaveChangesAsync ();
 
-    //    return result.Entity;
+        return result.Entity;
+      }
+      catch ( Exception )
+      {
 
-    //  }
-    //  catch ( Exception )
-    //  {
-
-    //    throw;
-    //  }
-    //}
+        throw;
+      }
+    }
 
     public async Task DeleteEmployee ( int id )
     {
@@ -44,8 +43,8 @@ namespace SalesManagementApp.Services
         var employee = await salesManagementDbContext.Employees.FindAsync ( id );
         if ( employee != null )
         {
-          salesManagementDbContext.Employees.Remove ( employee );
-          await salesManagementDbContext.SaveChangesAsync ();
+          _ = salesManagementDbContext.Employees.Remove ( employee );
+          _ = await salesManagementDbContext.SaveChangesAsync ();
         }
       }
       catch ( Exception )
@@ -81,32 +80,32 @@ namespace SalesManagementApp.Services
       }
     }
 
-    //public async Task<List<ReportToModel>> GetReportToEmployees ()
-    //{
-    //  try
-    //  {
-    //    var employees = await ( from e in this.salesManagementDbContext.Employees
-    //                            join j in this.salesManagementDbContext.EmployeeJobTitles
-    //                            on e.EmployeeJobTitleId equals j.EmployeeJobTitleId
-    //                            where j.Name.ToUpper () == "TL" || j.Name.ToUpper () == "SM"
+    public async Task<List<ReportToModel>> GetReportToEmployees ()
+    {
+      try
+      {
+        var employees = await ( from e in salesManagementDbContext.Employees
+                                join j in salesManagementDbContext.EmployeeJobTitles
+                                on e.EmployeeJobTitleId equals j.EmployeeJobTitleId
+                                where j.Name.ToUpper () == "TL" || j.Name.ToUpper () == "SM"
 
-    //                            select new ReportToModel
-    //                            {
-    //                              ReportToEmpId = e.Id,
-    //                              ReportToName = e.FirstName + " "
-    //                                                 + e.LastName.Substring ( 0, 1 ).ToUpper () + "."
-    //                            } ).ToListAsync ();
+                                select new ReportToModel
+                                {
+                                  ReportToEmpId = e.Id,
+                                  ReportToName = e.FirstName + " "
+                                                     + e.LastName.Substring ( 0, 1 ).ToUpper () + "."
+                                } ).ToListAsync ();
 
-    //    employees.Add ( new ReportToModel { ReportToEmpId = null, ReportToName = "<None>" } );
+        employees.Add ( new ReportToModel { ReportToEmpId = null, ReportToName = "<None>" } );
 
-    //    return employees.OrderBy ( o => o.ReportToEmpId ).ToList ();
-    //  }
-    //  catch ( Exception )
-    //  {
+        return employees.OrderBy ( o => o.ReportToEmpId ).ToList ();
+      }
+      catch ( Exception )
+      {
 
-    //    throw;
-    //  }
-    //}
+        throw;
+      }
+    }
 
     public async Task UpdateEmployee ( EmployeeModel employeeModel )
     {
@@ -125,7 +124,7 @@ namespace SalesManagementApp.Services
           employeeToUpdate.Email = employeeModel.Email;
           employeeToUpdate.EmployeeJobTitleId = employeeModel.EmployeeJobTitleId;
 
-          await salesManagementDbContext.SaveChangesAsync ();
+          _ = await salesManagementDbContext.SaveChangesAsync ();
         }
 
       }

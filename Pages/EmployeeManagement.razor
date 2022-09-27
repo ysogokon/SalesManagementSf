@@ -14,10 +14,21 @@
 <h3>Employee Management</h3>
 
 <div style="max-width:900px">
-  <SfGrid DataSource="employeeData">
-    <GridEditSettings AllowEditing="true"></GridEditSettings>
+  <SfGrid DataSource="employeeData" Toolbar="@toolbar">
+    <GridEditSettings AllowAdding="true" AllowEditing="true"></GridEditSettings>
     <GridColumns>
       <GridColumn IsPrimaryKey="true" Field="@nameof(EmployeeModel.Id)" Width="50px"></GridColumn>
+
+      <GridColumn HeaderText="Profile" Width="120px">
+        <Template>
+          @{
+            var employee = ( context as EmployeeModel );
+          }
+          <div class="profile-image-container">
+            <img src="@(employee?.ImagePath)" alt="" />
+          </div>
+        </Template>
+      </GridColumn>
 
       <GridColumn HeaderText="First Name" Field="@nameof(EmployeeModel.FirstName)"></GridColumn>
 
@@ -50,10 +61,37 @@
 
       <GridColumn HeaderText="Date of Birth" Field="@nameof(EmployeeModel.DateOfBirth)" Format="d"></GridColumn>
 
-      <GridColumn HeaderText="Reports To" Field="@nameof(EmployeeModel.ReportToEmpId)" Width="100px"></GridColumn>
+      <GridForeignColumn HeaderText="Reports To" TValue="ReportToModel"
+                         Field="@nameof(EmployeeModel.ReportToEmpId)"
+                         ForeignDataSource="reportToEmployeeData"
+                         ForeignKeyValue="ReportToName" Width="130px">
+        <EditTemplate>
+          <SfDropDownList @bind-value="@((context as EmployeeModel).ReportToEmpId)"
+                          ID="ReportToEmpId"
+                          DataSource="reportToEmployeeData" TItem="ReportToModel"
+                          TValue="Nullable<int>">
+            <DropDownListFieldSettings Text="ReportToName" Value="ReportToEmpId">
+            </DropDownListFieldSettings>
+
+          </SfDropDownList>
+        </EditTemplate>
+      </GridForeignColumn>
     </GridColumns>
+    <SfSpinner @bind-Visible="@SpinnerVisible"></SfSpinner>
   </SfGrid>
 </div>
+<style>
+  .profile-image-container {
+      width: 80px;
+      height: 80px;
+  }
+
+      .profile-image-container img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+      }
+</style>
 
 @code {
   private enum GenderVal
@@ -63,17 +101,23 @@
     Other
   }
 
+  public bool SpinnerVisible { get; set; } = false;
+
   private string[] genderCollection = Enum.GetNames ( typeof ( GenderVal ) );
 
   private List<EmployeeModel>? employeeData = null;
   private List<EmployeeJobTitle>? employeeJobTitleData;
-  //private List<object> toolbar = new List<object> { "Add", "Edit", "Delete", "Update", "Cancel", "Search" };
+  private List<ReportToModel>? reportToEmployeeData;
+  private List<object> toolbar = new List<object> { "Add", "Edit", "Delete", "Update", "Cancel", "Search" };
 
   protected override async Task OnInitializedAsync ()
   {
+    SpinnerVisible = true;
+
     employeeData = await EmployeeManagementService.GetEmployees ();
     employeeJobTitleData = await EmployeeManagementService.GetJobTitles ();
+    reportToEmployeeData = await EmployeeManagementService.GetReportToEmployees ();
+
+    SpinnerVisible = false;
   }
-
-
 }
