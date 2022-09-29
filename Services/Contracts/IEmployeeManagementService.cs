@@ -8,4 +8,7 @@ public interface IEmployeeManagementService
   Task<List<EmployeeModel>> GetEmployees ();
   Task<List<EmployeeJobTitle>> GetJobTitles ();
   Task<List<ReportToModel>> GetReportToEmployees ();
+  Task<Employee> AddEmployee ( EmployeeModel employee );
+  Task UpdateEmployee ( EmployeeModel employee );
+  Task DeleteEmployee ( int id );
 }

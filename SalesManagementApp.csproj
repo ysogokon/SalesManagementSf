@@ -21,4 +21,8 @@
     <Folder Include="wwwroot\images\profile\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="SalesManagementApp.sln" />
+  </ItemGroup>
+
 </Project>
