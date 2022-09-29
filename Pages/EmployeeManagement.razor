@@ -1,14 +1,5 @@
 ﻿@page "/EmployeeManagement"
 
-@using SalesManagementApp.Entities
-@using SalesManagementApp.Models
-@using SalesManagementApp.Services.Contracts
-@using Syncfusion.Blazor.Buttons
-@using Syncfusion.Blazor.DropDowns
-@using Syncfusion.Blazor.Grids
-@using Syncfusion.Blazor.Navigations
-@using Syncfusion.Blazor.Spinner
-
 @inject IEmployeeManagementService EmployeeManagementService
 
 <h3>Employee Management</h3>
@@ -26,7 +17,7 @@
     <GridEditSettings AllowAdding="true"
                       AllowEditing="true"
                       AllowDeleting="true"
-                      Mode="EditMode.Batch">
+                      Mode="EditMode.Normal">
 
       <HeaderTemplate>
         <span>@GetDialogHeaderText(context as EmployeeModel)</span>
