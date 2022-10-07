@@ -27,4 +27,5 @@ public class SalesManagementDbContext : DbContext
   public DbSet<RetailOutlet> RetailOutlets { get; set; }
   public DbSet<Order> Orders { get; set; }
   public DbSet<OrderItem> OrderItems { get; set; }
+  public DbSet<SalesOrderReport> SalesOrderReports { get; set; }
 }

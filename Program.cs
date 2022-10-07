@@ -23,6 +23,7 @@ builder.Services.AddScoped<IEmployeeManagementService, EmployeeManagementService
 builder.Services.AddScoped<IProductService, ProductService> ();
 builder.Services.AddScoped<IClientService, ClientService> ();
 builder.Services.AddScoped<IOrderService, OrderService> ();
+builder.Services.AddScoped<ISalesOrderReportService, SalesOrderReportService> ();
 
 var app = builder.Build ();
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense ( "NzMwMjY2QDMyMzAyZTMzMmUzME0vMTkxei9ZSGhDUHI1VWFud3FZWUx1QU5rQzh5MUhLVkpScFVuTmRBMUE9" );
