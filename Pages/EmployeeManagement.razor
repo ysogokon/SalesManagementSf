@@ -1,4 +1,5 @@
 ﻿@page "/EmployeeManagement"
+@attribute [Authorize ( Roles = "Admin, SM" )]
 
 @inject IEmployeeManagementService EmployeeManagementService
 

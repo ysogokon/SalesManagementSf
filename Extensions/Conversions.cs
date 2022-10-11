@@ -102,7 +102,7 @@ public static class Conversions
   {
     return new Appointment
     {
-      EmployeeId = 9, //appointmentModel.EmployeeId,
+      EmployeeId = appointmentModel.EmployeeId,
       Description = appointmentModel.Description,
       IsAllDay = appointmentModel.IsAllDay,
       RecurrenceId = appointmentModel.RecurrenceId,
@@ -135,10 +135,10 @@ public static class Conversions
   }
 
 
-  //public static async Task<Employee> GetEmployeeObject ( this System.Security.Claims.ClaimsPrincipal user, SalesManagementDbContext context )
-  //{
-  //  var emailAddress = user.Identity.Name;
-  //  var employee = await context.Employees.Where ( e => e.Email.ToLower () == emailAddress.ToLower () ).SingleOrDefaultAsync ();
-  //  return employee;
-  //}
+  public static async Task<Employee?> GetEmployeeObject ( this System.Security.Claims.ClaimsPrincipal user, SalesManagementDbContext context )
+  {
+    string? emailAddress = user.Identity?.Name;
+    Employee? employee = await context.Employees.Where ( e => e.Email.ToLower () == emailAddress.ToLower () ).SingleOrDefaultAsync ();
+    return employee ?? null;
+  }
 }
