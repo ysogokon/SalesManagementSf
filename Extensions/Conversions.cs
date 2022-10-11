@@ -98,42 +98,41 @@ public static class Conversions
                    } ).ToListAsync ();
   }
 
-  //public static Appointment Convert ( this AppointmentModel appointmentModel )
-  //{
-  //  return new Appointment
-  //  {
-  //    EmployeeId = appointmentModel.EmployeeId,
-  //    Description = appointmentModel.Description,
-  //    IsAllDay = appointmentModel.IsAllDay,
-  //    RecurrenceId = appointmentModel.RecurrenceId,
-  //    StartTime = appointmentModel.StartTime,
-  //    EndTime = appointmentModel.EndTime,
-  //    RecurrenceException = appointmentModel.RecurrenceException,
-  //    RecurrenceRule = appointmentModel.RecurrenceRule,
-  //    Location = appointmentModel.Location,
-  //    Subject = appointmentModel.Subject
-  //  };
+  public static Appointment Convert ( this AppointmentModel appointmentModel )
+  {
+    return new Appointment
+    {
+      EmployeeId = 9, //appointmentModel.EmployeeId,
+      Description = appointmentModel.Description,
+      IsAllDay = appointmentModel.IsAllDay,
+      RecurrenceId = appointmentModel.RecurrenceId,
+      StartTime = appointmentModel.StartTime,
+      EndTime = appointmentModel.EndTime,
+      RecurrenceException = appointmentModel.RecurrenceException,
+      RecurrenceRule = appointmentModel.RecurrenceRule,
+      Location = appointmentModel.Location,
+      Subject = appointmentModel.Subject
+    };
 
-  //}
-  //public static async Task<List<AppointmentModel>> Convert ( this IQueryable<Appointment> appointments )
-  //{
-  //  return await ( from a in appointments
-  //                 select new AppointmentModel
-  //                 {
-  //                   Id = a.Id,
-  //                   EmployeeId = a.EmployeeId,
-  //                   Description = a.Description,
-  //                   IsAllDay = a.IsAllDay,
-  //                   RecurrenceId = a.RecurrenceId,
-  //                   StartTime = a.StartTime,
-  //                   EndTime = a.EndTime,
-  //                   RecurrenceException = a.RecurrenceException,
-  //                   RecurrenceRule = a.RecurrenceRule,
-  //                   Location = a.Location,
-  //                   Subject = a.Subject
-  //                 } ).ToListAsync ();
-
-  //}
+  }
+  public static async Task<List<AppointmentModel>> Convert ( this IQueryable<Appointment> appointments )
+  {
+    return await ( from a in appointments
+                   select new AppointmentModel
+                   {
+                     Id = a.Id,
+                     EmployeeId = a.EmployeeId,
+                     Description = a.Description,
+                     IsAllDay = a.IsAllDay,
+                     RecurrenceId = a.RecurrenceId,
+                     StartTime = a.StartTime,
+                     EndTime = a.EndTime,
+                     RecurrenceException = a.RecurrenceException,
+                     RecurrenceRule = a.RecurrenceRule,
+                     Location = a.Location,
+                     Subject = a.Subject
+                   } ).ToListAsync ();
+  }
 
 
   //public static async Task<Employee> GetEmployeeObject ( this System.Security.Claims.ClaimsPrincipal user, SalesManagementDbContext context )

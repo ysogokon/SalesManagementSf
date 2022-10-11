@@ -6,7 +6,7 @@
 
 <div class="col-lg-9 control-section sb-property-border">
   <div class="content-wrapper">
-    <SfDiagramComponent Width="100%" Height="810px" ConnectorCreating="@OnConnectorCreating" NodeCreating="@OnNodeCreating" InteractionController="@DiagramInteractions.ZoomPan">
+    <SfDiagramComponent Width="100%" Height="1600px" ConnectorCreating="@OnConnectorCreating" NodeCreating="@OnNodeCreating" InteractionController="@DiagramInteractions.ZoomPan">
       <ScrollSettings @bind-ScrollLimit="@scrollLimit"></ScrollSettings>
       <DataSourceSettings ID="EmployeeId" ParentID="ReportsToId" DataSource="OrganizationData"> </DataSourceSettings>
       <Layout @bind-Type="Type" @bind-HorizontalSpacing="@HorizontalSpacing" @bind-Orientation="@OrientationType" @bind-VerticalSpacing="@VerticalSpacing" @bind-HorizontalAlignment="@HorizontalAlignment" @bind-VerticalAlignment="@VerticalAlignment" GetLayoutInfo="GetLayoutInfo">
@@ -22,59 +22,60 @@
               string role = ( node1.Data as OrganizationModel ).JobTitle;
               string BgImage = ( node1.Data as OrganizationModel ).ImagePath;
               Syncfusion.Blazor.Diagram.NodeShapes type = ( context as Node ).Shape.Type;
+
               if ( type == Syncfusion.Blazor.Diagram.NodeShapes.HTML )
               {
                 <div style="position: absolute;
-                width: 100%;
-                height: 100%;
-                border: 1px solid #E0E0E0;
-                background: #FFFFFF;
-                box-sizing: border-box;
-                border-radius: 8px;
-                padding-top: 5px;">
-                  <div id="image" style="
-                                    width: 62px;
-                                    height: 65px;
-                                    float: left;
-                                    background-size: 60px 65px;
-                                    background-image: url(@(BgImage));
+                                    width: 100%;
+                                    height: 100%;
                                     border: 1px solid #E0E0E0;
+                                    background: #FFFFFF;
                                     box-sizing: border-box;
-                                    border-radius: 80px;
-                                    margin-top: 12px;
-                                    margin-bottom: 5px;
-                                    margin-left: 5px;
-                                    ">
+                                    border-radius: 8px;
+                                    padding-top: 5px;">
+                  <div id="image" style="
+                                              width: 62px;
+                                              height: 65px;
+                                              float: left;
+                                              background-size: 60px 65px;
+                                              background-image: url(@(BgImage));
+                                              border: 1px solid #E0E0E0;
+                                              box-sizing: border-box;
+                                              border-radius: 80px;
+                                              margin-top: 12px;
+                                              margin-bottom: 5px;
+                                              margin-left: 5px;
+                                              ">
                   </div>
                   <div>
                     <div id="header1" style="
-                                    width: 165px;
-                                    height: 14px;
-                                    left: 664px;
-                                    top: 152px;
-                                    font-family: Roboto;
-                                    font-style: normal;
-                                    font-weight: 600;
-                                    font-size: 13px;
-                                    line-height: 14px;
-                                    /* identical to box height, or 87% */
-                                    letter-spacing: 0.1px;
-                                    color: #000000;">
+                                        width: 165px;
+                                        height: 14px;
+                                        left: 664px;
+                                        top: 152px;
+                                        font-family: Roboto;
+                                        font-style: normal;
+                                        font-weight: 600;
+                                        font-size: 13px;
+                                        line-height: 14px;
+                                        /* identical to box height, or 87% */
+                                        letter-spacing: 0.1px;
+                                        color: #000000;">
                       @NameId
                     </div>
                     <div id="header2" style="
-                    /* width: 121px; */
-                    /* height: 14px; */
-                    left: 660px;
-                    top: 170px;
-                    font-family: Roboto;
-                    font-style: normal;
-                    font-weight: normal;
-                    font-size: 11px;
-                    line-height: 14px;
-                    letter-spacing: 0.1px;
-                    color: #7B7B7B;
-                    ">
+                                            /* width: 121px; */
+                                            /* height: 14px; */
+                                            left: 660px;
+                                            top: 170px;
+                                            font-family: Roboto;
+                                            font-style: normal;
+                                            font-weight: normal;
+                                            font-size: 11px;
+                                            line-height: 14px;
+                                            letter-spacing: 0.1px;
+                                            color: #7B7B7B;
+                                            ">
                       @role
                     </div>
                     <hr style="margin-top: 4px;margin-bottom: -10px;left: 553px;top: 192px;height: 0px;border: 1px solid #E0E0E0;border-top: none;">
@@ -83,21 +84,21 @@
                         <tbody>
                           <tr>
                             <td style="font-family: Roboto;
-                font-style: normal;
-                font-weight: normal;
-                font-size: 10px;
-                line-height: 14px;
-                letter-spacing: 0.1px;
-                color: #7B7B7B;">
+                                                            font-style: normal;
+                                                            font-weight: normal;
+                                                            font-size: 10px;
+                                                            line-height: 14px;
+                                                            letter-spacing: 0.1px;
+                                                            color: #7B7B7B;">
                               Emp ID
                             </td>
                             <td style="font-family: Roboto;
-                font-style: normal;
-                font-weight: 600;
-                font-size: 11px;
-                line-height: 14px;
-                letter-spacing: 0.1px;
-                color: #323232;">
+                                                            font-style: normal;
+                                                            font-weight: 600;
+                                                            font-size: 11px;
+                                                            line-height: 14px;
+                                                            letter-spacing: 0.1px;
+                                                            color: #323232;">
                               @EmpId
                             </td>
                           </tr>
@@ -113,6 +114,7 @@
       </SfDiagramComponent>
     </div>
   </div>
+
   @code
   {
   private const string selecteditem = "image-pattern-style e-selected-style";
@@ -156,12 +158,14 @@
         }
       };
   }
+
   private TreeInfo GetLayoutInfo ( IDiagramObject obj, TreeInfo options )
   {
     options.EnableSubTree = true;
     options.Orientation = Syncfusion.Blazor.Diagram.Orientation.Horizontal;
     return options;
   }
+
   private void OnNodeCreating ( IDiagramObject obj )
   {
     Node node = obj as Node;
